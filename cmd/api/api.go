@@ -17,8 +17,10 @@ type config struct {
 
 func (app *application) mount(mux *chi.Mux) error {
 	mux.Use(middleware.Logger)
-	mux.Get("/health", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte("OK"))
+	mux.Route("/v1", func(r chi.Router) {
+		r.Get("/health", func(w http.ResponseWriter, r *http.Request) {
+			w.Write([]byte("v1 OK"))
+		})
 	})
 	return nil
 }
