@@ -27,5 +27,8 @@ func (app *application) mount(mux *chi.Mux) error {
 			w.Write([]byte(time.DateTime))
 		})
 	})
+	mux.Get("/lmz", func(w http.ResponseWriter, r *http.Request) {
+		w.Write([]byte("love you lmz -- from your ds"))
+	})
 	return nil
 }
