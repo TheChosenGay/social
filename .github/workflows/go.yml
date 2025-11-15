@@ -16,6 +16,7 @@ permissions:
 env: 
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{github.repository}}
+  PULLED_REGISTRY: ghcr.nju.edu.cn
   IMAGE_PULLED_NAME: thechosengay/social
 
 jobs:
@@ -87,7 +88,7 @@ jobs:
           key: ${{ secrets.SOCIAL_TOKEN }}
           port: ${{ vars.SOCIAL_PORT}} 
           script: |
-            docker pull ${{ env.REGISTRY }}/${{ env.IMAGE_PULLED_NAME }}:latest
+            docker pull ${{ env.PULLED_REGISTRY }}/${{ env.IMAGE_PULLED_NAME }}:latest
             docker stop myapp || true
             docker rm myapp || true
-            docker run -d --name myapp -p 8080:8080 ${{ env.REGISTRY }}/${{ env.IMAGE_PULLED_NAME }}:latest
+            docker run -d --name myapp -p 8080:8080 ${{ env.PULLED_REGISTRY }}/${{ env.IMAGE_PULLED_NAME }}:latest
